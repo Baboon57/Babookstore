@@ -1,0 +1,66 @@
+import PropTypes from 'prop-types';
+import React from 'react';
+import {View, Text, StyleSheet, Image, Animated} from 'react-native';
+import books from '../Data/books';
+import ParallaxScrollView from "@/components/ParallaxScrollView";
+import {Button, Text as TextPaper} from "react-native-paper";
+import BookCard from "@/components/BookCard";
+import ScrollView = Animated.ScrollView;
+
+
+export default function Books() {
+       const handleAddToCart = (book: Book) => {
+           // Add the book to the cart logic here
+           console.log(`Added ${book.title} to cart`);
+       };
+
+
+    return (
+        <ScrollView>
+        <View style={{
+            flex: 1,
+            justifyContent: "flex-start",
+            alignItems: "center",
+            paddingTop: 40,
+            gap: 20,
+            backgroundColor: "#20161f",
+        }}
+        >
+            <View style={styles.container}>
+                <Text style={styles.title}>Books Page</Text>
+                {books.map((book) => (
+                    <BookCard key={book.id} book={book} onAddToCart={handleAddToCart}/>
+                ))}
+            </View>
+        </View>
+        </ScrollView>
+    )
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+    },
+    book: {
+        marginBottom: 16,
+    },
+    bookTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    bookPrice: {
+        fontSize: 16,
+        color: 'gray',
+    },
+    bookImage: {
+        width: 100,
+        height: 150,
+        resizeMode: 'contain',
+    },
+});
