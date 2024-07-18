@@ -39,17 +39,18 @@ const styles = StyleSheet.create({
         elevation: 2,
     },
     bookImage: {
-        width: 100,
-        height: 150,
+        width: 300,
+        height: 500,
         resizeMode: 'contain',
         marginBottom: 16,
     },
     bookTitle: {
         fontSize: 18,
         fontWeight: 'bold',
+        color : 'black',
     },
     bookPrice: {
         fontSize: 16,
-        color: 'gray',
+        color: 'black',
     },
 });
