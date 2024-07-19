@@ -27,7 +27,7 @@ export default function Books() {
             }}
             >
                 <View style={styles.container}>
-                    <Text style={styles.title}>Books Page</Text>
+                    <TextPaper variant="displayLarge" style={{color: "#c59f60", paddingBottom: 20}}>Books Page</TextPaper>
                     {books.map((book) => (
                         <BookCard key={book.id} book={book} onAddToCart={handleAddToCart}/>
                     ))}
