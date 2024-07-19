@@ -1,22 +1,22 @@
-import React, { createContext, useState } from 'react';
+import CartContext, {CartI} from "@/contexts/cart";
+import React, {useContext, useState} from 'react';
+import {state} from "sucrase/dist/types/parser/traverser/base";
 
-export const CartContext = createContext<{
-    cart: any[];
-    addToCart: (item: any) => void;
-}>({
-    cart: [],
-    addToCart: () => {},
-});
 
-export const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState<any[]>([]);
-
-    const addToCart = (item) => {
-        setCart((prevCart) => [...prevCart, item]);
-    };
+export default function CartProvider({
+ children,
+}: {
+    children: React.ReactNode;
+}) {
+    const [cart, setCart] = useState<CartI[]>([]);
 
     return (
-        <CartContext.Provider value={{ cart, addToCart }}>
+        <CartContext.Provider value={{
+            cart: cart,
+            addToCart: (item: CartI) => setCart((prevCart) => [...prevCart, item]),
+            removeFromCart: (id: number) => setCart((prevCart) => prevCart.filter((item) => item.id !== id)),
+            clearCart: () => setCart([])
+        }}>
             {children}
         </CartContext.Provider>
     );

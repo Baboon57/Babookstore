@@ -1,38 +1,38 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import {View, Text, StyleSheet, Image, Animated} from 'react-native';
 import books from '../Data/books';
-import ParallaxScrollView from "@/components/ParallaxScrollView";
 import {Button, Text as TextPaper} from "react-native-paper";
 import BookCard from "@/components/BookCard";
 import ScrollView = Animated.ScrollView;
+import {CartProvider} from "@/providers/CartProvider";
 
 
 export default function Books() {
-       const handleAddToCart = (book: Book) => {
-           // Add the book to the cart logic here
-           console.log(`Added ${book.title} to cart`);
-       };
+    const handleAddToCart = (book: Book) => {
+        console.log(`Added ${book.title} to cart`);
+
+    };
 
 
     return (
+
         <ScrollView>
-        <View style={{
-            flex: 1,
-            justifyContent: "flex-start",
-            alignItems: "center",
-            paddingTop: 40,
-            gap: 20,
-            backgroundColor: "#20161f",
-        }}
-        >
-            <View style={styles.container}>
-                <Text style={styles.title}>Books Page</Text>
-                {books.map((book) => (
-                    <BookCard key={book.id} book={book} onAddToCart={handleAddToCart}/>
-                ))}
+            <View style={{
+                flex: 1,
+                justifyContent: "flex-start",
+                alignItems: "center",
+                paddingTop: 40,
+                gap: 20,
+                backgroundColor: "#20161f",
+            }}
+            >
+                <View style={styles.container}>
+                    <Text style={styles.title}>Books Page</Text>
+                    {books.map((book) => (
+                        <BookCard key={book.id} book={book} onAddToCart={handleAddToCart}/>
+                    ))}
+                </View>
             </View>
-        </View>
         </ScrollView>
     )
 }
