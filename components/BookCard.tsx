@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import { View, StyleSheet, Image, Pressable } from 'react-native';
+import {Button, Text} from 'react-native-paper';
 
 interface Book {
     id: number;
@@ -19,7 +20,11 @@ const BookCard: React.FC<BookCardProps> = ({ book, onAddToCart }) => {
             <Image source={{ uri: book.image }} style={styles.bookImage} />
             <Text style={styles.bookTitle}>{book.title}</Text>
             <Text style={styles.bookPrice}>Price: ${book.price}</Text>
-            <Button title="Add to Cart" onPress={() => onAddToCart(book)} />
+
+                <Button style={styles.AddToCartButton} icon="cart" onPress={() => onAddToCart(book)}>
+                    <Text variant="bodyLarge"> to Cart </Text>
+                </Button>
+
         </View>
     );
 };
@@ -33,13 +38,14 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         borderRadius: 8,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
+        shadowOffset: {width: 0, height: 2},
         shadowOpacity: 0.2,
         shadowRadius: 4,
         elevation: 2,
     },
     bookImage: {
         width: 300,
+        maxWidth: 300,
         height: 500,
         resizeMode: 'contain',
         marginBottom: 16,
@@ -47,10 +53,17 @@ const styles = StyleSheet.create({
     bookTitle: {
         fontSize: 18,
         fontWeight: 'bold',
-        color : 'black',
+        maxWidth: 300, // fix the harry potter bookcard being too wide because of its title
+        color: 'black',
     },
     bookPrice: {
         fontSize: 16,
         color: 'black',
     },
+    AddToCartButton: {
+        color: '#000000',
+        backgroundColor: '#db924b',
+        fontWeight: 'bold',
+
+    }
 });

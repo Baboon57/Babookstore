@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
-// import Modal from 'react-native-modal';
-import {Modal} from "react-native";
-import {Text} from 'react-native-paper';
+import {Modal as BisModal} from "react-native";
+import {Button, Text} from 'react-native-paper';
+import {contain} from "@hapi/hoek";
 
 interface CartButtonProps<CartButtonProps> {
     onPress: () => void;
@@ -22,34 +22,43 @@ const CartButton: React.FC = () => {
     return (
         <>
         <TouchableOpacity style={styles.cartButton} onPress={handleCartPress}>
-            <Text style={styles.cartButtonText}>Cart</Text>
+            <Text  style={{
+                fontSize: styles.cartButton.fontSize,
+                fontWeight: styles.cartButton.fontWeight,
+                color: styles.cartButtonText.color,
+                padding: 12,
+            }}>
+                Cart
+            </Text>
         </TouchableOpacity>
-        <Modal
-            animationType="slide" // Choose an animation type ('slide', 'fade', 'none')
+        <BisModal
+            animationType="slide"
             transparent={true} // Set modal to be transparent
             visible={isVisible} // Control modal visibility based on state
             onRequestClose={handleCloseModal} // Function to call when user requests to close modal
             >
-            <View style={{
-                paddingTop: 40,
-            }
-
-            }> <Text variant="displayLarge">CartTest</Text></View>
-        </Modal>
+            <View style={styles.cartButton}>
+                <Text variant="displayLarge" style={styles.cartButtonText}>CartTest</Text>
+                <Button  mode="contained" style={styles.cartButton} onPress={(handleCloseModal)}>Close Cart</Button>
+            </View>
+        </BisModal>
     </>
     )
 };
 
 const styles = StyleSheet.create({
     cartButton: {
-        backgroundColor: '#007bff',
-        padding: 10,
-        borderRadius: 5,
+        backgroundColor: '#db924b',
+        padding: 0,
+        marginTop: 40,
         alignItems: 'center',
         justifyContent: 'center',
+        fontSize: 24,
+        fontWeight: "bold",
+        backfaceVisibility: "visible"
     },
     cartButtonText: {
-        color: '#fff',
+        color: '#20161f',
         fontSize: 16,
         fontWeight: 'bold',
     },

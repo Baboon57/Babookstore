@@ -2,7 +2,7 @@ import {useReducer} from 'react';
 import CartContext from "../contexts/cart";
 import PropTypes from "prop-types";
 
-function cartReducer(state, action) {
+function cartReducer(state : any, action : any) {
     switch (action.type) {
         case 'ADD_TO_CART':
             return [...state, action.payload];
@@ -28,10 +28,10 @@ function CartProvider({ children }) {
         <CartContext.Provider
             value={{
                 cart: state,
-                addToCart: (book) => {
+                addToCart: (book : any) => {
                     dispatch({type: 'ADD_TO_CART', payload: book});
                 },
-                removeFromCart: (bookId) => {
+                removeFromCart: (bookId : any) => {
                     dispatch({type: 'REMOVE_ROM_CART', payload: bookId});
                 },
                 clearCart: () => {
