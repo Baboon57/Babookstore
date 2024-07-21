@@ -1,58 +1,57 @@
-import React, { useState } from 'react';
-import { View, Button, Modal, Text, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
+// import { useNavigation } from '@react-navigation/native';
+// import Modal from 'react-native-modal';
+import {Modal} from "react-native";
+import {Text} from 'react-native-paper';
 
-const CartButton = () => {
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [cartItemsCount, setCartItemsCount] = useState(0);
+interface CartButtonProps<CartButtonProps> {
+    onPress: () => void;
+}
 
-    const openCartModal = () => {
-        setIsModalVisible(true);
+const CartButton: React.FC = () => {
+    // const navigation = useNavigation();
+    const [isVisible, setIsVisible] = useState(false);
+
+    const handleCartPress = () => {
+        setIsVisible(true);
     };
-
-    const closeCartModal = () => {
-        setIsModalVisible(false);
-    };
-
+    const handleCloseModal = () => {
+        setIsVisible(false);
+    }
     return (
-        <View>
-            <Button title="Cart" onPress={openCartModal} />
-            {cartItemsCount > 0 && (
-                <View style={styles.badge}>
-                    <Text style={styles.badgeText}>{cartItemsCount}</Text>
-                </View>
-            )}
+        <>
+        <TouchableOpacity style={styles.cartButton} onPress={handleCartPress}>
+            <Text style={styles.cartButtonText}>Cart</Text>
+        </TouchableOpacity>
+        <Modal
+            animationType="slide" // Choose an animation type ('slide', 'fade', 'none')
+            transparent={true} // Set modal to be transparent
+            visible={isVisible} // Control modal visibility based on state
+            onRequestClose={handleCloseModal} // Function to call when user requests to close modal
+            >
+            <View style={{
+                paddingTop: 40,
+            }
 
-            <Modal visible={isModalVisible} animationType="slide">
-                <View style={styles.modalContent}>
-                    <Text>Cart Modal Content</Text>
-                    {/* Add your cart modal content here */}
-                    <Button title="Close" onPress={closeCartModal} />
-                </View>
-            </Modal>
-        </View>
-    );
+            }> <Text variant="displayLarge">CartTest</Text></View>
+        </Modal>
+    </>
+    )
 };
 
 const styles = StyleSheet.create({
-    badge: {
-        position: 'absolute',
-        top: -6,
-        right: -6,
-        backgroundColor: 'red',
-        borderRadius: 6,
-        width: 12,
-        height: 12,
+    cartButton: {
+        backgroundColor: '#007bff',
+        padding: 10,
+        borderRadius: 5,
         alignItems: 'center',
         justifyContent: 'center',
     },
-    badgeText: {
-        color: 'white',
-        fontSize: 10,
-    },
-    modalContent: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+    cartButtonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
     },
 });
 
