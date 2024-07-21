@@ -16,13 +16,13 @@ export default function Index() {
             }}
         >
 
-            <TextPaper variant="displayLarge" style={{color: "#c59f60"}}>Welcome to our bookstore</TextPaper>
-            <TextPaper variant="bodyLarge" style={{color: "#c59f60"}}>Find your next favorite book here and enjoy
+            <TextPaper variant="displayLarge" style={{color: "#c59f60", padding: 30, paddingBottom: 0}}>Welcome to our bookstore</TextPaper>
+            <TextPaper variant="bodyLarge" style={{color: "#c59f60", padding: 10, paddingTop: 0}}>Find your next favorite book here and enjoy
                 reading!</TextPaper>
             <View
                 style={{
                     flex: 1,
-                    gap: 10,
+                    gap: 50,
                 }}
             >
 

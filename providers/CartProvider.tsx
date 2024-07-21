@@ -1,23 +1,50 @@
-import CartContext, {CartI} from "@/contexts/cart";
-import React, {useContext, useState} from 'react';
-import {state} from "sucrase/dist/types/parser/traverser/base";
+import {useReducer} from 'react';
+import CartContext from "../contexts/cart";
+import PropTypes from "prop-types";
 
+function cartReducer(state, action) {
+    switch (action.type) {
+        case 'ADD_TO_CART':
+            return [...state, action.payload];
+        case 'REMOVE_ROM_CART' : {
+            const index = state.findIndex((book: { id: any; }) => book.id === action.payload);
+            if (index === -1) {
+                return state;
+            }
+            const copy = [...state];
+            copy.splice(index, 1);
+            return copy;
+        }
+        case 'CLEAR_CART':
+            return [];
+        default:
+            return state;
+    }
+}
 
-export default function CartProvider({
- children,
-}: {
-    children: React.ReactNode;
-}) {
-    const [cart, setCart] = useState<CartI[]>([]);
-
+function CartProvider({ children }) {
+    const [state, dispatch] = useReducer(cartReducer, []);
     return (
-        <CartContext.Provider value={{
-            cart: cart,
-            addToCart: (item: CartI) => setCart((prevCart) => [...prevCart, item]),
-            removeFromCart: (id: number) => setCart((prevCart) => prevCart.filter((item) => item.id !== id)),
-            clearCart: () => setCart([])
-        }}>
+        <CartContext.Provider
+            value={{
+                cart: state,
+                addToCart: (book) => {
+                    dispatch({type: 'ADD_TO_CART', payload: book});
+                },
+                removeFromCart: (bookId) => {
+                    dispatch({type: 'REMOVE_ROM_CART', payload: bookId});
+                },
+                clearCart: () => {
+                    dispatch({type: 'CLEAR_CART'});
+                },
+            }}
+        >
             {children}
         </CartContext.Provider>
     );
+}
+CartProvider.propTypes = {
+    children: PropTypes.node.isRequired,
 };
+
+export default CartProvider;

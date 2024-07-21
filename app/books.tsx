@@ -4,7 +4,7 @@ import books from '../Data/books';
 import {Button, Text as TextPaper} from "react-native-paper";
 import BookCard from "@/components/BookCard";
 import ScrollView = Animated.ScrollView;
-import {CartProvider} from "@/providers/CartProvider";
+import CartProvider from "@/providers/CartProvider";
 
 
 export default function Books() {

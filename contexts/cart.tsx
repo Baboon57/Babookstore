@@ -1,16 +1,9 @@
-import {createContext} from "react";
-
-export interface CartI {
-    id: number;
-    title: string;
-    price: number;
-}
-
+import { createContext } from 'react';
 
 const CartContext = createContext({
     cart: [],
-    addToCart: (item: CartI) => {},
-    removeFromCart: (id: number) => {},
+    addToCart: () => {},
+    removeFromCart: () => {},
     clearCart: () => {},
 });
 
