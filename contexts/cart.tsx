@@ -1,9 +1,10 @@
 import { createContext } from 'react';
+import {Book} from "@/components/BookCard";
 
 const CartContext = createContext({
     cart: [],
-    addToCart: () => {},
-    removeFromCart: () => {},
+    addToCart: (book: Book) => {},
+    removeFromCart: (book: Book) => {},
     clearCart: () => {},
 });
 
