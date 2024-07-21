@@ -1,18 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, Animated} from 'react-native';
 import books from '../Data/books';
 import {Button, Text as TextPaper} from "react-native-paper";
 import BookCard from "@/components/BookCard";
+import {Book} from "@/components/BookCard";
 import ScrollView = Animated.ScrollView;
 import CartProvider from "@/providers/CartProvider";
+import {useReducer} from "react";
+import useCart from "@/hooks/useCart";
+import Cart from "@/contexts/cart";
+
 
 
 export default function Books() {
-    const handleAddToCart = (book: Book) => {
-        console.log(`Added ${book.title} to cart`);
-
-    };
-
 
     return (
 
@@ -27,9 +27,10 @@ export default function Books() {
             }}
             >
                 <View style={styles.container}>
-                    <TextPaper variant="displayLarge" style={{color: "#c59f60", paddingBottom: 20}}>Books Page</TextPaper>
+                    <TextPaper variant="displayLarge" style={{color: "#c59f60", paddingBottom: 20}}>Books
+                        Page</TextPaper>
                     {books.map((book) => (
-                        <BookCard key={book.id} book={book} onAddToCart={handleAddToCart}/>
+                        <BookCard key={book.id} book={book}/>
                     ))}
                 </View>
             </View>

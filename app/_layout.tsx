@@ -15,7 +15,7 @@ export default function RootLayout() {
         <SafeAreaView style={[styles.container]}>
             <PaperProvider>
                 <CartProvider>
-                    <CartButton></CartButton>
+                    <CartButton/>
                     <Slot/>
                 </CartProvider>
             </PaperProvider>

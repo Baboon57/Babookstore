@@ -2,11 +2,11 @@ import {useReducer} from 'react';
 import CartContext from "../contexts/cart";
 import PropTypes from "prop-types";
 
-function cartReducer(state : any, action : any) {
+function cartReducer(state: any, action: any) {
     switch (action.type) {
         case 'ADD_TO_CART':
             return [...state, action.payload];
-        case 'REMOVE_ROM_CART' : {
+        case 'REMOVE_FROM_CART' : {
             const index = state.findIndex((book: { id: any; }) => book.id === action.payload);
             if (index === -1) {
                 return state;
@@ -22,17 +22,17 @@ function cartReducer(state : any, action : any) {
     }
 }
 
-function CartProvider({ children }) {
+function CartProvider({children}) {
     const [state, dispatch] = useReducer(cartReducer, []);
     return (
         <CartContext.Provider
             value={{
                 cart: state,
-                addToCart: (book : any) => {
+                addToCart: (book) => {
                     dispatch({type: 'ADD_TO_CART', payload: book});
                 },
-                removeFromCart: (bookId : any) => {
-                    dispatch({type: 'REMOVE_ROM_CART', payload: bookId});
+                removeFromCart: (bookId) => {
+                    dispatch({type: 'REMOVE_FROM_CART', payload: bookId});
                 },
                 clearCart: () => {
                     dispatch({type: 'CLEAR_CART'});
@@ -43,6 +43,7 @@ function CartProvider({ children }) {
         </CartContext.Provider>
     );
 }
+
 CartProvider.propTypes = {
     children: PropTypes.node.isRequired,
 };

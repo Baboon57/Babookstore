@@ -1,16 +1,21 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
 import {Modal as BisModal} from "react-native";
 import {Button, Text} from 'react-native-paper';
-import {contain} from "@hapi/hoek";
+
+import useCart from "@/hooks/useCart"
+import CartProvider from "@/providers/CartProvider";
+import CartCardBook from "@/components/CartCardBook";
+import CartContext from '@/contexts/cart';
 
 interface CartButtonProps<CartButtonProps> {
     onPress: () => void;
 }
 
+
 const CartButton: React.FC = () => {
-    // const navigation = useNavigation();
+    const {cart} = useCart();
     const [isVisible, setIsVisible] = useState(false);
 
     const handleCartPress = () => {
@@ -19,6 +24,11 @@ const CartButton: React.FC = () => {
     const handleCloseModal = () => {
         setIsVisible(false);
     }
+
+
+
+
+
     return (
         <>
         <TouchableOpacity style={styles.cartButton} onPress={handleCartPress}>
@@ -31,18 +41,23 @@ const CartButton: React.FC = () => {
                 Cart
             </Text>
         </TouchableOpacity>
-        <BisModal
+
+            <BisModal
             animationType="slide"
             transparent={true} // Set modal to be transparent
             visible={isVisible} // Control modal visibility based on state
             onRequestClose={handleCloseModal} // Function to call when user requests to close modal
+
             >
-            <View style={styles.cartButton}>
-                <Text variant="displayLarge" style={styles.cartButtonText}>CartTest</Text>
-                <Button  mode="contained" style={styles.cartButton} onPress={(handleCloseModal)}>Close Cart</Button>
-            </View>
+                <View style={styles.cartButton}>
+                    <Text variant="displayLarge" style={styles.cartButtonText}>Books in your Cart</Text>
+
+                    <CartCardBook/>
+
+                </View>
         </BisModal>
-    </>
+
+        </>
     )
 };
 
@@ -50,7 +65,7 @@ const styles = StyleSheet.create({
     cartButton: {
         backgroundColor: '#db924b',
         padding: 0,
-        marginTop: 40,
+        marginTop: 45,
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: 24,

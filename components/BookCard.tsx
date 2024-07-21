@@ -1,27 +1,34 @@
 import React from 'react';
 import { View, StyleSheet, Image, Pressable } from 'react-native';
 import {Button, Text} from 'react-native-paper';
+import useCart from "@/hooks/useCart";
 
-interface Book {
+export interface Book {
     id: number;
     title: string;
     price: number;
     image: string;
 }
 
-interface BookCardProps {
+export interface BookCardProps {
     book: Book;
     onAddToCart: (book: Book) => void;
 }
 
-const BookCard: React.FC<BookCardProps> = ({ book, onAddToCart }) => {
+const BookCard: React.FC<BookCardProps> = ({ book}) => {
+    const {addToCart, cart} = useCart()
+
+
     return (
         <View style={styles.card}>
             <Image source={{ uri: book.image }} style={styles.bookImage} />
             <Text style={styles.bookTitle}>{book.title}</Text>
             <Text style={styles.bookPrice}>Price: ${book.price}</Text>
 
-                <Button style={styles.AddToCartButton} icon="cart" onPress={() => onAddToCart(book)}>
+                <Button style={styles.AddToCartButton} icon="cart" onPress={() => {
+                    addToCart(book)
+                    console.log(cart)
+                }}>
                     <Text variant="bodyLarge"> to Cart </Text>
                 </Button>
 
