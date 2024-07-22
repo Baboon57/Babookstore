@@ -1,18 +1,14 @@
 import React, {useState} from 'react';
 import {View, TouchableOpacity, GestureResponderEvent, StyleSheet, Pressable, ScrollView} from 'react-native';
-import {Text, Button, List} from 'react-native-paper';
+import {Text, Button, List, IconButton} from 'react-native-paper';
 import useCart from '../hooks/useCart';
 import PropTypes from "prop-types";
-import {Link, router, useRouter} from "expo-router";
-import {useExpoRouter} from "expo-router/build/global-state/router-store";
-
+import {useRouter} from "expo-router";
+import {Book} from "@/components/BookCard";
+import CartProvider from "@/providers/CartProvider";
 
 const CartCardBook = () => {
-    const CartCardBook = ({book}) => {
-        const router = useRouter();
-
-
-    }
+    const router = useRouter();
         const {clearCart, removeFromCart, cart} = useCart();
         const handleCloseModal = () => {
         }
@@ -31,21 +27,25 @@ const CartCardBook = () => {
             }}>
 
                 {
-                    cart.map(({price, title}) => {
+                    cart.map(({price, title, id}) => {
                         return (
-                            <TouchableOpacity
-                                style={{margin: 5, backgroundColor: '#20161f', borderColor: '#db924b', borderWidth: 1,borderRadius: 5, width: '100%'}}>
-                                <Pressable onPress={() => removeFromCart(title)}>
+                            <Pressable
+                                style={{margin: 5, backgroundColor: '#20161f', borderColor: '#db924b', borderWidth: 1,borderRadius: 5, width: 250, maxWidth: 300}}>
+
                                     <List.Item
-                                        title={title}
-                                        description={price}
+                                        title={<Text style={{ color: '#db924b' }}>{title}</Text>}
+                                        description={<Text style={{ color: '#db924b' }}>{price} $</Text>}
                                         right={props =>
-                                            <List.Icon {...props} icon="trash-can" color="#db924b"/>
+                                            <IconButton {...props} icon="trash-can" iconColor="#db924b" onPress={() => {
+                                                console.log(title);
+                                                removeFromCart(id);
+
+                                            }}/>
                                         }
                                     >
                                     </List.Item>
-                                </Pressable>
-                            </TouchableOpacity>
+
+                            </Pressable>
                         )
                     })
                 }

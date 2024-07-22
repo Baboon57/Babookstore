@@ -9,6 +9,8 @@ import CartProvider from "@/providers/CartProvider";
 import {useReducer} from "react";
 import useCart from "@/hooks/useCart";
 import Cart from "@/contexts/cart";
+import {images} from "@/Data/images";
+
 
 
 

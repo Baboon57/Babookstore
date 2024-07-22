@@ -2,6 +2,8 @@ import React from 'react';
 import { View, StyleSheet, Image, Pressable } from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import useCart from "@/hooks/useCart";
+import {images} from "@/Data/images";
+
 
 export interface Book {
     id: number;
@@ -13,6 +15,7 @@ export interface Book {
 export interface BookCardProps {
     book: Book;
     onAddToCart: (book: Book) => void;
+    onRemoveFromCart: (book: Book) => void;
 }
 
 const BookCard: React.FC<BookCardProps> = ({ book}) => {
@@ -21,7 +24,7 @@ const BookCard: React.FC<BookCardProps> = ({ book}) => {
 
     return (
         <View style={styles.card}>
-            <Image source={{ uri: book.image }} style={styles.bookImage} />
+            <Image source={images[book.image]} style={styles.bookImage} />
             <Text style={styles.bookTitle}>{book.title}</Text>
             <Text style={styles.bookPrice}>Price: ${book.price}</Text>
 
