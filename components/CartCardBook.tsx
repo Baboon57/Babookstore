@@ -3,12 +3,22 @@ import {View, TouchableOpacity, GestureResponderEvent, StyleSheet, Pressable, Sc
 import {Text, Button, List} from 'react-native-paper';
 import useCart from '../hooks/useCart';
 import PropTypes from "prop-types";
+import {Link, router, useRouter} from "expo-router";
+import {useExpoRouter} from "expo-router/build/global-state/router-store";
+
 
 const CartCardBook = () => {
-    const {clearCart,cart} = useCart();
-    const handleCloseModal = () => {
-        setIsVisible(false);
+    const CartCardBook = ({book}) => {
+        const router = useRouter();
+
+        const handleCheckout = () => {
+            router.push('/app/checkout');
+        };
+
     }
+        const {clearCart, removeFromCart, cart} = useCart();
+        const handleCloseModal = () => {
+        }
 
 
         return (
@@ -16,40 +26,48 @@ const CartCardBook = () => {
             <View style={{
                 flexDirection: 'column',
                 alignItems: 'center',
-                width: '75vw',
                 borderRadius: 8,
                 borderWidth: 1,
-                padding: 10
+                borderColor: '#db924b',
+                padding: 10,
+                maxWidth: '90vw'
             }}>
 
                 {
                     cart.map(({price, title}) => {
-                            return (
-                                <TouchableOpacity style={{margin: 5, backgroundColor: '#20161f', borderRadius: 5, width: '100%'}}>
+                        return (
+                            <TouchableOpacity
+                                style={{margin: 5, backgroundColor: '#20161f', borderColor: '#db924b', borderWidth: 1,borderRadius: 5, width: '100%'}}>
+                                <Pressable onPress={() => removeFromCart(title)}>
                                     <List.Item
                                         title={title}
                                         description={price}
                                         right={props =>
-                                            <List.Icon {...props}
-                                                       icon="trash-can"
-                                            >
-                                            </List.Icon>
+                                            <List.Icon {...props} icon="trash-can" color="#db924b"/>
                                         }
                                     >
                                     </List.Item>
-                                </TouchableOpacity>
-                            )
-                        })
+                                </Pressable>
+                            </TouchableOpacity>
+                        )
+                    })
                 }
 
-                <Text style={[styles.cartButtonText, {padding: 30}]}> {cart.reduce((a, b) => b["price"] + a, 0)} USD</Text>
+                <Text style={[styles.cartButtonText, {color: '#db924b'}, {padding: 30}]}> {cart.reduce((a, b) => b["price"] + a, 0)} USD</Text>
                 <Pressable>
                     <Button style={[styles.cartButton, {flexDirection: 'column', backgroundColor: 'red'}]}
-                            onPress={() => {clearCart(cart);}}
+                            onPress={() => {
+                                clearCart(cart);
+                            }}
                             mode="contained">Clear Cart</Button>
+                    </Pressable>
+            <Pressable>
                     <Button style={[styles.cartButton, {flexDirection: 'column', backgroundColor: 'green'}]}
-                            mode="contained">Checkout</Button>
-                </Pressable>
+                            mode="contained"
+                            onPress={() => {
+                                handleCheckout();
+                            }}>Checkout</Button>
+            </Pressable>
             </View>
 
 
@@ -60,9 +78,9 @@ const CartCardBook = () => {
 
 
 CartCardBook.propTypes = {
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired
+    title: PropTypes.string,
+    price: PropTypes.number,
+    id: PropTypes.number
 };
 
 export default CartCardBook;

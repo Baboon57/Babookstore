@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {View, TouchableOpacity, StyleSheet, ScrollView} from 'react-native';
+import {View, TouchableOpacity, StyleSheet, ScrollView, Image} from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
 import {Modal as BisModal} from "react-native";
 import {Button, Text} from 'react-native-paper';
@@ -28,11 +28,11 @@ const CartButton: React.FC = () => {
 
     return (
         <>
-            <TouchableOpacity style={styles.cartButton} onPress={handleCartPress}>
+            <TouchableOpacity style={[styles.cartButton, {backgroundColor: '#db924b'}]} onPress={handleCartPress}>
                 <Text style={{
                     fontSize: styles.cartButton.fontSize,
                     fontWeight: styles.cartButton.fontWeight,
-                    color: styles.cartButtonText.color,
+                    color: "#20161f",
                     padding: 12,
                 }}>
                     Cart
@@ -57,19 +57,22 @@ const CartButton: React.FC = () => {
                             mode="contained"
                             onPress={handleCloseModal}
                         >
-                            Close
+                            <Text style={styles.cartButtonText}> Close </Text>
                         </Button>
-
+                        <Image source={require('../assets/images/algerie_telecom.png')}
+                                style={{maxWidth: '100%', alignSelf: 'center'}}/>
                     </View></ScrollView>
+
             </BisModal>
 
         </>
     )
 };
 
+
 const styles = StyleSheet.create({
     cartButton: {
-        backgroundColor: '#db924b',
+        backgroundColor: '#20161f',
         padding: 0,
         marginTop: 45,
         alignItems: 'center',
@@ -79,7 +82,7 @@ const styles = StyleSheet.create({
         backfaceVisibility: "visible"
     },
     cartButtonText: {
-        color: '#20161f',
+        color: '#db924b',
         fontSize: 16,
         fontWeight: 'bold',
     },

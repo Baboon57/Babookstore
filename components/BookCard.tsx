@@ -27,9 +27,8 @@ const BookCard: React.FC<BookCardProps> = ({ book}) => {
 
                 <Button style={styles.AddToCartButton} icon="cart" onPress={() => {
                     addToCart(book)
-                    console.log(cart)
                 }}>
-                    <Text variant="bodyLarge"> to Cart </Text>
+                    <Text variant="bodyLarge">add to Cart </Text>
                 </Button>
 
         </View>

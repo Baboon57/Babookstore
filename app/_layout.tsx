@@ -6,11 +6,14 @@ import CartProvider from "../providers/CartProvider"
 import CartButton from "../components/CartButton"
 import {useNavigation} from "@react-navigation/native";
 import {handlePress} from "react-native-paper/lib/typescript/components/RadioButton/utils";
-import {SafeAreaView} from "react-native";
+import {Image, SafeAreaView} from "react-native";
 import {StyleSheet} from 'react-native';
+import {contain} from "@hapi/hoek";
+import {useRouter} from "expo-router";
 
 
 export default function RootLayout() {
+
     return (
         <SafeAreaView style={[styles.container]}>
             <PaperProvider>
@@ -19,7 +22,9 @@ export default function RootLayout() {
                     <Slot/>
                 </CartProvider>
             </PaperProvider>
+
         </SafeAreaView>
+
     );
 };
 
