@@ -47,10 +47,10 @@ const CartButton: React.FC = () => {
 
             >
                 <ScrollView>
-                    <View style={styles.cartButton}>
+                    <View style={[styles.cartButton, {marginTop: 70}]}>
                         <Text variant="displayLarge" style={styles.cartButtonText}>Books in your Cart</Text>
 
-                        <CartCardBook/>
+                        <CartCardBook setIsVisible={setIsVisible}/>
 
                         <Button
                             style={styles.cartButton}
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     cartButton: {
         backgroundColor: '#20161f',
         padding: 0,
-        marginTop: 45,
+        marginTop: 40,
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: 24,

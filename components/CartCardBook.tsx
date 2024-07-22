@@ -7,11 +7,9 @@ import {useRouter} from "expo-router";
 import {Book} from "@/components/BookCard";
 import CartProvider from "@/providers/CartProvider";
 
-const CartCardBook = () => {
-    const router = useRouter();
+const CartCardBook = ({setIsVisible}) => {
+        const router = useRouter();
         const {clearCart, removeFromCart, cart} = useCart();
-        const handleCloseModal = () => {
-        }
 
 
         return (
@@ -30,41 +28,53 @@ const CartCardBook = () => {
                     cart.map(({price, title, id}) => {
                         return (
                             <Pressable
-                                style={{margin: 5, backgroundColor: '#20161f', borderColor: '#db924b', borderWidth: 1,borderRadius: 5, width: 250, maxWidth: 300}}>
+                                style={{
+                                    margin: 5,
+                                    backgroundColor: '#20161f',
+                                    borderColor: '#db924b',
+                                    borderWidth: 1,
+                                    borderRadius: 5,
+                                    width: 250,
+                                    maxWidth: 300
+                                }}>
 
-                                    <List.Item
-                                        title={<Text style={{ color: '#db924b' }}>{title}</Text>}
-                                        description={<Text style={{ color: '#db924b' }}>{price} $</Text>}
-                                        right={props =>
-                                            <IconButton {...props} icon="trash-can" iconColor="#db924b" onPress={() => {
-                                                console.log(title);
-                                                removeFromCart(id);
+                                <List.Item
+                                    title={<Text style={{color: '#db924b'}}>{title}</Text>}
+                                    description={<Text style={{color: '#db924b'}}>{price} $</Text>}
+                                    right={props =>
+                                        <IconButton {...props} icon="trash-can" iconColor="#db924b" onPress={() => {
+                                            console.log(title);
+                                            removeFromCart(id);
 
-                                            }}/>
-                                        }
-                                    >
-                                    </List.Item>
+                                        }}/>
+                                    }
+                                >
+                                </List.Item>
 
                             </Pressable>
                         )
                     })
                 }
 
-                <Text style={[styles.cartButtonText, {color: '#db924b'}, {padding: 30}]}> {cart.reduce((a, b) => b["price"] + a, 0)} USD</Text>
+                <Text
+                    style={[styles.cartButtonText, {color: '#db924b'}, {padding: 30}]}> {cart.reduce((a, b) => b["price"] + a, 0)} USD</Text>
                 <Pressable>
                     <Button style={[styles.cartButton, {flexDirection: 'column', backgroundColor: 'red'}]}
                             onPress={() => {
                                 clearCart(cart);
                             }}
                             mode="contained">Clear Cart</Button>
-                    </Pressable>
-            <Pressable>
+                </Pressable>
+                <Pressable>
                     <Button style={[styles.cartButton, {flexDirection: 'column', backgroundColor: 'green'}]}
                             mode="contained"
                             onPress={() => {
+                                setIsVisible(false);
                                 router.push('/checkout');
+
+
                             }}>Checkout</Button>
-            </Pressable>
+                </Pressable>
             </View>
 
 

@@ -1,6 +1,8 @@
 import {useRouter} from "expo-router";
 import {Image, View} from "react-native";
 import {Button, Text as TextPaper} from "react-native-paper";
+import CartButton from "@/components/CartButton";
+import React from "react";
 
 export default function Index() {
     const router = useRouter();

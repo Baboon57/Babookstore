@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, Button, ToastAndroid, Alert, Pressable} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Button, ToastAndroid, Alert, Pressable, ScrollView} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {IconButton, List} from "react-native-paper";
 import useCart from "@/hooks/useCart";
@@ -25,6 +25,7 @@ export default function CheckoutPage() {
     };
 
     return (
+        <ScrollView>
         <View style={styles.container}>
             <View style={{
                 flexDirection: 'column',
@@ -39,6 +40,7 @@ export default function CheckoutPage() {
                 {
                     cart.map(({price, title, id}) => {
                         return (
+
                             <Pressable key={id}
                                 style={{margin: 5, backgroundColor: '#20161f', borderColor: '#db924b', borderWidth: 1,borderRadius: 5, width: 250, maxWidth: 300}}>
 
@@ -49,14 +51,15 @@ export default function CheckoutPage() {
                                 </List.Item>
 
                             </Pressable>
+
                         )
                     })
                 }
 
-                <Text style={[styles.cartButtonText, {color: '#db924b'}, {padding: 30}]}> {cart.reduce((a, b) => b["price"] + a, 0)} USD</Text>
+                <Text style={[{fontSize: 16}, {fontWeight: 'bold'}, {color: '#db924b'}, {padding: 30}]}> {cart.reduce((a, b) => b["price"] + a, 0)} USD</Text>
 
             </View>
-            <Text style={styles.label}>Nom :</Text>
+            <Text style={[styles.label, {paddingTop: 50} ]}>Nom :</Text>
             <TextInput
                 style={styles.input}
                 value={name}
@@ -70,12 +73,13 @@ export default function CheckoutPage() {
             />
             <Text style={styles.label}>Téléphone :</Text>
             <TextInput
-                style={styles.input}
+                style={[styles.input, {marginBottom : 30}]}
                 value={phone}
                 onChangeText={setPhone}
             />
             <Button title="Place Order" color={'#db924b'} onPress={handleSubmit} />
         </View>
+        </ScrollView>
     );
 }
 
@@ -91,6 +95,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 5,
         color: '#db924b',
+
     },
     input: {
         height: 40,

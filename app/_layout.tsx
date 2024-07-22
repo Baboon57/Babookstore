@@ -19,7 +19,6 @@ export default function RootLayout() {
             <PaperProvider>
                 <CartProvider>
                     <CartButton/>
-
                     <Slot/>
                 </CartProvider>
             </PaperProvider>
