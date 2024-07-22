@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import {View, TouchableOpacity, StyleSheet, ScrollView} from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
 import {Modal as BisModal} from "react-native";
 import {Button, Text} from 'react-native-paper';
@@ -26,36 +26,42 @@ const CartButton: React.FC = () => {
     }
 
 
-
-
-
     return (
         <>
-        <TouchableOpacity style={styles.cartButton} onPress={handleCartPress}>
-            <Text  style={{
-                fontSize: styles.cartButton.fontSize,
-                fontWeight: styles.cartButton.fontWeight,
-                color: styles.cartButtonText.color,
-                padding: 12,
-            }}>
-                Cart
-            </Text>
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.cartButton} onPress={handleCartPress}>
+                <Text style={{
+                    fontSize: styles.cartButton.fontSize,
+                    fontWeight: styles.cartButton.fontWeight,
+                    color: styles.cartButtonText.color,
+                    padding: 12,
+                }}>
+                    Cart
+                </Text>
+            </TouchableOpacity>
 
             <BisModal
-            animationType="slide"
-            transparent={true} // Set modal to be transparent
-            visible={isVisible} // Control modal visibility based on state
-            onRequestClose={handleCloseModal} // Function to call when user requests to close modal
+                animationType="slide"
+                transparent={true} // Set modal to be transparent
+                visible={isVisible} // Control modal visibility based on state
+                onRequestClose={handleCloseModal} // Function to call when user requests to close modal
 
             >
-                <View style={styles.cartButton}>
-                    <Text variant="displayLarge" style={styles.cartButtonText}>Books in your Cart</Text>
+                <ScrollView>
+                    <View style={styles.cartButton}>
+                        <Text variant="displayLarge" style={styles.cartButtonText}>Books in your Cart</Text>
 
-                    <CartCardBook/>
+                        <CartCardBook/>
 
-                </View>
-        </BisModal>
+                        <Button
+                            style={styles.cartButton}
+                            mode="contained"
+                            onPress={handleCloseModal}
+                        >
+                            Close
+                        </Button>
+
+                    </View></ScrollView>
+            </BisModal>
 
         </>
     )
