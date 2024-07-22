@@ -61,7 +61,8 @@ const CartButton: React.FC = () => {
                         </Button>
                         <Image source={require('../assets/images/algerie_telecom.png')}
                                 style={{maxWidth: '100%', alignSelf: 'center'}}/>
-                    </View></ScrollView>
+                    </View>
+                </ScrollView>
 
             </BisModal>
 

@@ -11,9 +11,6 @@ const CartCardBook = () => {
     const CartCardBook = ({book}) => {
         const router = useRouter();
 
-        const handleCheckout = () => {
-            router.push('/app/checkout');
-        };
 
     }
         const {clearCart, removeFromCart, cart} = useCart();
@@ -65,7 +62,7 @@ const CartCardBook = () => {
                     <Button style={[styles.cartButton, {flexDirection: 'column', backgroundColor: 'green'}]}
                             mode="contained"
                             onPress={() => {
-                                handleCheckout();
+                                router.push('/checkout');
                             }}>Checkout</Button>
             </Pressable>
             </View>
